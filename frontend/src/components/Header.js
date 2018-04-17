@@ -11,7 +11,7 @@ export default class Header extends Component {
 				<nav>
 					<ul>
 						<li><Link to = '/'>Home</Link></li>
-						<li><Link to = '/login'>Sign in</Link></li>
+						<li><Link to = '/admin/login/'>Sign in</Link></li>
 					</ul>
 				</nav>
 			</header>

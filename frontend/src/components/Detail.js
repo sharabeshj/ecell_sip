@@ -13,7 +13,7 @@ export default class Detail extends Component {
 		this.loadDetail();
 	}
 	loadDetail(){
-		var url = '/api/jobs/'+parseInt(this.props.params.pk,10)+'/';
+		var url = '/api/jobs/'+parseInt(this.props.match.params.pk,10)+'/';
 		axios.get(url)
 		.then(res => {
 			this.setState({ data : res.data });
@@ -28,8 +28,8 @@ export default class Detail extends Component {
 			<div>
 				<h2>{jobDetail.title}</h2>
 				<h3>Description : {jobDetail.description}</h3>
-				<Link to = {{ pathname : '/apply',state : { job : jobDetail.title }}}>Accept</Link>
-				<Link to = '/home'>Back</Link>
+				<Link to = {{ pathname : '/apply',state : { job : jobDetail.title }}}><button>Accept</button></Link>
+				<Link to = '/'><button>Back</button></Link>
 			</div>
 			)
 	}

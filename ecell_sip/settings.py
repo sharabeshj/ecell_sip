@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'api.apps.ApiConfig',
     'corsheaders',
+    'rest_framework.authtoken',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -132,9 +134,19 @@ STATIC_URL = '/static/'
 CORS_ORIGIN_ALLOW_ALL = True
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES' : (
-            'rest_framework.authentication.BasicAuthentication',
-            'rest_framework.authentication.SessionAuthentication',
-            'rest_framework.authentication.TokenAuthentication',
-        )
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication'   
+    )
+}
+
+ASGI_APPLICATION = 'ecell_sip.routing.application'
+
+CHANNEL_LAYERS = {
+    'default' : {
+    'BACKEND' : 'channels_redis.core.RedisChannelLayer',
+    'CONFIG' : {
+        "hosts" : [('127.0.0.1',6379)]
+    }
+    }
 }

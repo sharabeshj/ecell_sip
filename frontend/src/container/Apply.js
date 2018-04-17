@@ -19,8 +19,9 @@ export default class Apply extends Component {
 		this.handleEmail = this.handleEmail.bind(this);
 		this.handleSop = this.handleSop.bind(this);
 		this.handleGdrive = this.handleGdrive.bind(this);
+		this.handleClear = this.handleClear.bind(this);
 	}
-	componentDidmount(){
+	componentDidMount(){
 		this.setState({job : this.props.location.state.job})
 	}
 	handleFormSubmit(e){
@@ -29,16 +30,17 @@ export default class Apply extends Component {
 			name : this.state.name,
 			email : this.state.email,
 			sop : this.state.sop,
+			job : this.state.job,
 			gdrive : this.state.gdrive,
 		};
-		axios.post('/api/applicants',{formPayLoad})
+		axios.post('/api/applicants',formPayLoad)
 			.then(res => {
 				this.redirect();
 			})
 			.catch(e => console.log(e));			
 	}
 	redirect(){
-		return  <Redirect to = '/home'/>;
+		return  <Redirect to = '/'/>;
 	}
 	handleName(e){
 		this.setState({ name : e.target.value });
@@ -51,6 +53,15 @@ export default class Apply extends Component {
 	}
 	handleGdrive(e){
 		this.setState({ gdrive : e.target.value });
+	}
+	handleClear(e){
+		e.preventDefault();
+		this.setState({
+			name : '',
+			email : '',
+			sop :  '',
+			gdrive : ''
+		});
 	}
 	render(){
 		return (
@@ -72,6 +83,7 @@ export default class Apply extends Component {
 				<SingleInput
 				inputType = {'text'}
 				name = {'job'}
+				title = {'Job'}
 				content = {this.state.job}
 				/>
 				<TextArea
@@ -88,6 +100,7 @@ export default class Apply extends Component {
 				controlFunc = {this.handleGdrive}
 				placeholder = {'enter your link here'}/>
 				<input type = "submit" value = "submit"/>
+				<button onClick = {this.handleClear}>Clear</button>
 			</form>
 			)
 	}

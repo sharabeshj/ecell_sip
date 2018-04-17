@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom';
 import SingleInput from '../components/SingleInput';
 import Admin from './Admin'
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+var auth = require('./auth')
 
 export default class Login extends Component {
 	constructor(props) {
@@ -16,6 +18,9 @@ export default class Login extends Component {
 		this.handlePassword = this.handlePassword.bind(this);
 		this.handleFormSubmit = this.handleFormSubmit.bind(this);
 	}
+	static contextTypes = {
+		router : PropTypes.object.isRequired
+	}
 	handleUsername(e){
 		this.setState({ username : e.target.value });
 	}
@@ -23,15 +28,14 @@ export default class Login extends Component {
 		this.setState({ password : e.target.value });
 	}
 	handleFormSubmit(e){
-		const formPayLoad = {
-			username : this.state.username,
-			password : this.state.password
-		}
-		axios.post('/api/login/',{formPayLoad})
-			.then(res => {
-				ReactDOM.render(<Admin token = {res.token}/>,document.getElementById('root'));
-			})
-			.catch(e => console.log(e));
+		e.preventDefault();
+		var username = this.state.username;
+		var password = this.state.password;
+		auth.login(username,password,(loggedIn) => {
+			if(loggedIn){
+				this.context.router.history.replace('/admin/');
+			}
+		});
 	}
 	render(){
 		return (

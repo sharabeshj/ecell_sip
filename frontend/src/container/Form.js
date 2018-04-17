@@ -2,6 +2,8 @@ import React,{ Component } from 'react';
 import axios from 'axios';
 import SingleInput from '../components/SingleInput';
 import TextArea from '../components/TextArea';
+import {Redirect} from 'react-router-dom';
+
 
 export default class Form extends Component {
 	constructor(props){
@@ -12,9 +14,10 @@ export default class Form extends Component {
 			category : '',
 		};
 		this.handleTitle = this.handleTitle.bind(this);
-		this.handleDescription = this.description.bind(this);
+		this.handleDescription = this.handleDescription.bind(this);
 		this.handleCategory = this.handleCategory.bind(this);
 		this.handleFormsubmit = this.handleFormsubmit.bind(this);
+		this.handleClear = this.handleClear.bind(this);
 	}
 	handleTitle(e){
 		this.setState({ title : e.target.value });
@@ -26,17 +29,28 @@ export default class Form extends Component {
 		this.setState({ category : e.target.value });
 	}
 	handleFormsubmit(e){
+		e.preventDefault();
 		const formPayload = {
 			title : this.state.title,
 			description :  this.state.description,
 			category : this.state.category,
 		}
-		var token = 'Token '+this.props.token; 
-		axios.post('/api/jobs/',{headers : { 'Content-type' : 'application/json','Authentication' : token},formPayload})
+		axios.post('/api/jobs/',formPayload,{headers : { 'Authorization' : 'Token '+localStorage.token}})
 			.then(res => {
 				this.redirect();
 			})
 			.catch(e => console.log(e));
+	}
+	redirect(){
+		<Redirect to = '/' />
+	}
+	handleClear(e){
+		e.preventDefault();
+		this.setState({
+			title : '',
+			description : '',
+			category : ''
+		});
 	}
 	render(){
 		return (

@@ -23,7 +23,7 @@ export default class List extends Component {
 	render() {
 		if(this.state.data){
 					var jobNodes = this.state.data.map(function(job){
-						return <li key = { job.id }><Link to = {'/detail/${job.id}'}>{ job.title }</Link></li>
+						return <li key = { job.id }><Link to = {`/detail/${job.id}`}>{ job.title }</Link></li>
 					})
 				}
 		return (

@@ -5,7 +5,7 @@ export default class TextArea extends Component {
 	constructor(props){
 		super(props);
 	}
-	static PropTypes = {
+	static propTypes = {
 		title : PropTypes.string.isRequired,
 		rows : PropTypes.number.isRequired,
 		content : PropTypes.string.isRequired,

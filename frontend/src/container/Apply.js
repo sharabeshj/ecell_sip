@@ -22,7 +22,8 @@ export default class Apply extends Component {
 		this.handleClear = this.handleClear.bind(this);
 	}
 	componentDidMount(){
-		this.setState({job : this.props.location.state.job})
+		this.setState({job : this.props.location.state.job});
+		this.connection = new WebSocket('ws://127.0.0.1:8000/applicants/');
 	}
 	handleFormSubmit(e){
 		e.preventDefault();
@@ -35,6 +36,10 @@ export default class Apply extends Component {
 		};
 		axios.post('/api/applicants',formPayLoad)
 			.then(res => {
+				this.handleClear(e);
+				this.connection.send(JSON.stringify({
+					activity_type : 'apply'
+				}));
 				this.redirect();
 			})
 			.catch(e => console.log(e));			

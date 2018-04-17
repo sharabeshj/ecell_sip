@@ -40,6 +40,7 @@ export default class Form extends Component {
 		}
 		axios.post('/api/jobs/',formPayload,{headers : { 'Authorization' : 'Token '+localStorage.token}})
 			.then(res => {
+				this.handleClear(e);
 				this.connection.send(JSON.stringify(formPayload));
 				this.redirect();
 			})

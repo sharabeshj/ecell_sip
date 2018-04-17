@@ -44,6 +44,12 @@ class JobDetail(APIView):
 		
 
 class ApplicantsList(APIView):
+
+	def get(self,request,format = None):
+		applicants = Applicants.objects.all()
+		applicantsSerializer = ApplicantsSerializer(applicants,many = True)
+		return Response(applicantsSerializer.data)
+
 	def post(self,request,format = None):
 		applicantsSerializer = ApplicantsSerializer(data = request.data)
 		if applicantsSerializer.is_valid():

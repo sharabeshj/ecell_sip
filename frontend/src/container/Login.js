@@ -5,9 +5,20 @@ import SingleInput from '../components/SingleInput';
 import Admin from './Admin'
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-var auth = require('./auth')
+import { withStyles } from 'material-ui/styles';
+import Button from 'material-ui/Button';
 
-export default class Login extends Component {
+var auth = require('./auth');
+const styles = theme => ({
+	button : {
+		margin : theme.spacing.unit,
+	},
+	input : {
+		display : 'none',
+	},
+});
+
+class Login extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -20,6 +31,9 @@ export default class Login extends Component {
 	}
 	static contextTypes = {
 		router : PropTypes.object.isRequired
+	}
+	static propTypes = {
+		classes : PropTypes.object.isRequired,
 	}
 	handleUsername(e){
 		this.setState({ username : e.target.value });
@@ -38,6 +52,7 @@ export default class Login extends Component {
 		});
 	}
 	render(){
+		const { classes } = this.props;
 		return (
 			<form onSubmit = {this.handleFormSubmit}>
 				<SingleInput
@@ -54,8 +69,15 @@ export default class Login extends Component {
 				content = {this.state.password}
 				controlFunc = {this.handlePassword}
 				placeholder = {'Password'}/>
-				<input type= "submit" value = "login"/>
+				<input className = { classes.input } type = "submit" id = "submit"/>
+				<label htmlFor = "submit">
+					<Button variant = "raised" component = "span" color="primary" className = { classes.button }>
+						Login
+					</Button>
+				</label>
 			</form>
 			)
 	}
 }
+
+export default withStyles(styles)(Login);

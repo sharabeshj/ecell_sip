@@ -6,7 +6,7 @@ class JobConsumer(AsyncWebsocketConsumer):
 		await self.channel_layer.group_add("jobs",self.channel_name)
 		await self.accept()
 
-	async def disconnect(self):
+	async def disconnect(self,close_code):
 		await self.channel_layer.group_discard("jobs",self.channel_name)
 
 	async def receive(self,text_data):
@@ -32,7 +32,7 @@ class ApplicantConsumer(AsyncWebsocketConsumer):
 		await self.channel_layer.group_add("applicants",self.channel_name)
 		await self.accept()
 
-	async def disconnect(self):
+	async def disconnect(self,close_code):
 		await self.channel_layer.group_discard("applicants",self.channel_name)
 
 	async def receive(self,text_data):

@@ -3,8 +3,20 @@ import axios from 'axios';
 import SingleInput from '../components/SingleInput';
 import TextArea from '../components/TextArea';
 import {Redirect} from 'react-router-dom';
+import { withStyles } from 'material-ui/styles';
+import Button from 'material-ui/Button';
+import PropTypes from 'prop-types';
 
-export default class Apply extends Component {
+const styles = theme => ({
+	button : {
+		margin : theme.spacing.unit,
+	},
+	input : {
+		display : 'none',
+	},
+});
+
+class Apply extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
@@ -20,6 +32,9 @@ export default class Apply extends Component {
 		this.handleSop = this.handleSop.bind(this);
 		this.handleGdrive = this.handleGdrive.bind(this);
 		this.handleClear = this.handleClear.bind(this);
+	}
+	static propTypes = {
+		classes : PropTypes.object.isRequired,
 	}
 	componentDidMount(){
 		this.setState({job : this.props.location.state.job});
@@ -69,6 +84,7 @@ export default class Apply extends Component {
 		});
 	}
 	render(){
+		const { classes } = this.props;
 		return (
 			<form onSubmit = {this.handleFormSubmit}>
 				<SingleInput
@@ -104,9 +120,16 @@ export default class Apply extends Component {
 				content = {this.state.gdrive}
 				controlFunc = {this.handleGdrive}
 				placeholder = {'enter your link here'}/>
-				<input type = "submit" value = "submit"/>
-				<button onClick = {this.handleClear}>Clear</button>
+				<input className = { classes.input } type = "submit" id = "submit"/>
+				<label htmlFor = "submit">
+					<Button variant = "raised" component = "span" color="primary" className = { classes.button }>
+						Submit
+					</Button>
+				</label>
+				<Button variant = "raised" color = "primary" className = { classes.button } onClick = {this.handleClear}>Clear</Button>
 			</form>
 			)
 	}
 }
+
+export default withStyles(styles)(Apply);

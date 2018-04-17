@@ -20,6 +20,7 @@ docker
 create-react-app
 yarn
 mysql
+material - ui 
 
 ```
 
@@ -32,6 +33,7 @@ After installing the requirements,
 For running in development mode:
 
 ```
+npm install
 ./manage.py runserver
 yarn start
 

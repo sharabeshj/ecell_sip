@@ -37,11 +37,11 @@ class ApplicantConsumer(AsyncWebsocketConsumer):
 
 	async def receive(self,text_data):
 		text_data_json = json.loads(text_data)
-		acttivity_type = text_data_json['acttivity_type']
+		activity_type = text_data_json['activity_type']
 		await self.channel_layer.group_send("applicants",{
 			'type' : 'applicant_message',
 			'data' : json.dumps({
-				'acttivity_type' : acttivity_type
+				'activity_type' : activity_type
 				})
 			})
 

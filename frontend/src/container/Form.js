@@ -19,6 +19,9 @@ export default class Form extends Component {
 		this.handleFormsubmit = this.handleFormsubmit.bind(this);
 		this.handleClear = this.handleClear.bind(this);
 	}
+	componentDidMount(){
+		this.connection = new WebSocket('ws://127.0.0.1:8000/jobs/');
+	}
 	handleTitle(e){
 		this.setState({ title : e.target.value });
 	}
@@ -37,6 +40,7 @@ export default class Form extends Component {
 		}
 		axios.post('/api/jobs/',formPayload,{headers : { 'Authorization' : 'Token '+localStorage.token}})
 			.then(res => {
+				this.connection.send(JSON.stringify(formPayload));
 				this.redirect();
 			})
 			.catch(e => console.log(e));
@@ -76,6 +80,7 @@ export default class Form extends Component {
 				controlFunc = {this.handleCategory}
 				placeholder = {'Enter the category'}/>
 				<input type = "submit" value = "Add" />
+				<button onClick = {this.handleClear}>Clear</button>
 			</form>
 			)
 	}

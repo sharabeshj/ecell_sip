@@ -11,6 +11,12 @@ export default class List extends Component {
 		};
 	}
 	componentDidMount(){
+		this.connection = new WebSocket('ws://127.0.0.1:8000/jobs/');
+		this.connection.onmessage = e =>{
+			this.setState({
+				data : this.state.data.concat([e.data])
+			})
+		};
 		this.loadDataFromServer();
 	}
 	loadDataFromServer(){

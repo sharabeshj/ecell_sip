@@ -4,10 +4,18 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
+import Typography from 'material-ui/Typography';
+import Grid from 'material-ui/Grid';
 
 var auth = require('./auth');
 
 const styles = theme => ({
+	root : {
+		textAlign : 'center',
+		paddingTop : 16,
+		paddingBottom : 16,
+		marginTop : theme.spacing.unit * 3,
+	},
 	button : {
 		margin : theme.spacing.unit,
 	},
@@ -45,11 +53,15 @@ class Admin extends Component {
 	render(){
 		const { classes } = this.props;
 		return (
-			<div>
-				<h3>you are now logged in,{this.state.user.username}</h3>
+			<Grid container justify = "center">
+			<Grid item xs ={6} className = { classes.root }>
+				<Typography variant = "title" gutterBottom>
+				you are now logged in,{this.state.user.username}
+				</Typography>
 				<Button variant = "raised" color = "primary" className = { classes.button } onClick = {this.logoutHandler}>Logout</Button>
 				<Form/>
-				</div>
+				</Grid>
+				</Grid>
 			)
 	}
 }

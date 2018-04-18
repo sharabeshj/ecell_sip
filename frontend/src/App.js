@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './components/Header'
 import Main from './components/Main';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import 'typeface-roboto';
 
 class App extends Component {
 	constructor(){

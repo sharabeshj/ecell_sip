@@ -17,7 +17,7 @@ const styles = theme => ({
 		backgroundColor : theme.palette.background.paper,
 	},
 	gridList : {
-		width : 1000,
+		width : 1200,
 		height : 1000,
 	},
 	icon : {
@@ -70,7 +70,7 @@ class List extends Component {
 				}
 		return (
 				<div className = { classes.root }>
-					<GridList cellHeight = {180} className = { classes.gridList }>
+					<GridList spacing = {24} cellHeight = {250} className = { classes.gridList }>
 						<GridListTile key = "Subheader" cols = {2} style = {{ height : 'auto' }}>
 							<Subheader component = "div">Jobs</Subheader>
 						</GridListTile>

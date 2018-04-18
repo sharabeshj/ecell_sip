@@ -7,9 +7,13 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
+import Grid from 'material-ui/Grid';
 
 var auth = require('./auth');
 const styles = theme => ({
+	root : {
+		textAlign : 'center',
+	},
 	button : {
 		margin : theme.spacing.unit,
 	},
@@ -54,6 +58,8 @@ class Login extends Component {
 	render(){
 		const { classes } = this.props;
 		return (
+			<Grid container justify = "center">
+			<Grid item xs = {6} className = { classes.root }>
 			<form onSubmit = {this.handleFormSubmit}>
 				<SingleInput
 				inputType = {'text'}
@@ -76,6 +82,8 @@ class Login extends Component {
 					</Button>
 				</label>
 			</form>
+			</Grid>
+			</Grid>
 			)
 	}
 }

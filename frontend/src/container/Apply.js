@@ -6,8 +6,12 @@ import {Redirect} from 'react-router-dom';
 import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
 import PropTypes from 'prop-types';
+import Grid from 'material-ui/Grid';
 
 const styles = theme => ({
+	root : {
+		textAlign : 'center',
+	},
 	button : {
 		margin : theme.spacing.unit,
 	},
@@ -86,6 +90,8 @@ class Apply extends Component {
 	render(){
 		const { classes } = this.props;
 		return (
+			<Grid container justify = "center">
+			<Grid item xs = {6} className = { classes.root }>
 			<form onSubmit = {this.handleFormSubmit}>
 				<SingleInput
 				inputType = {'text'}
@@ -128,6 +134,8 @@ class Apply extends Component {
 				</label>
 				<Button variant = "raised" color = "primary" className = { classes.button } onClick = {this.handleClear}>Clear</Button>
 			</form>
+			</Grid>
+			</Grid>
 			)
 	}
 }

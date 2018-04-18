@@ -6,6 +6,7 @@ import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
+import Paper from 'material-ui/Paper';
 
 var auth = require('./auth');
 
@@ -54,12 +55,14 @@ class Admin extends Component {
 		const { classes } = this.props;
 		return (
 			<Grid container justify = "center">
-			<Grid item xs ={6} className = { classes.root }>
+			<Grid item xs ={6} >
+			<Paper className = { classes.root } elevation = { 4 }>
 				<Typography variant = "title" gutterBottom>
 				you are now logged in,{this.state.user.username}
 				</Typography>
 				<Button variant = "raised" color = "primary" className = { classes.button } onClick = {this.logoutHandler}>Logout</Button>
 				<Form/>
+				</Paper>
 				</Grid>
 				</Grid>
 			)

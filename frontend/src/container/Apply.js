@@ -7,10 +7,14 @@ import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
 import PropTypes from 'prop-types';
 import Grid from 'material-ui/Grid';
+import Paper from 'material-ui/Paper';
 
 const styles = theme => ({
 	root : {
 		textAlign : 'center',
+		paddingTop : 16,
+		paddingBottom : 16,
+		marginTop : theme.spacing.unit * 3,
 	},
 	button : {
 		margin : theme.spacing.unit,
@@ -91,7 +95,8 @@ class Apply extends Component {
 		const { classes } = this.props;
 		return (
 			<Grid container justify = "center">
-			<Grid item xs = {6} className = { classes.root }>
+			<Grid item xs = {6} >
+			<Paper className = { classes.root } elevation = { 4 }>
 			<form onSubmit = {this.handleFormSubmit}>
 				<SingleInput
 				inputType = {'text'}
@@ -134,6 +139,7 @@ class Apply extends Component {
 				</label>
 				<Button variant = "raised" color = "primary" className = { classes.button } onClick = {this.handleClear}>Clear</Button>
 			</form>
+			</Paper>
 			</Grid>
 			</Grid>
 			)
